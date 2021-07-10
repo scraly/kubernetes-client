@@ -3,8 +3,7 @@ from kubernetes import client
 
 # TOKEN
 ## You can use a Service Account (SA) token and generate a token in order to access to your cluster with necessary rights
-# $ export SECRET_NAME_SA =`kubectl get sa ${TEAM_SA} - n $NAMESPACE_SA - ojsonpath = "{ .secrets[0].name }"`
-# $ export TOKEN_SA =`kubectl get secret $SECRET_NAME_SA - n test-ns - ojsonpath = '{.data.token}' | base64 - d`
+# export TOKEN =$(kubectl get secret $(kubectl get sa  ${TEAM_SA} - n ${NAMESPACE_SA} - o yaml - ojsonpath='{.secrets[].name}') - n ${NAMESPACE_SA} - o jsonpath='{.data.token}' | base64 -D)
 token = "<my-token>"
 
 # KUBE
